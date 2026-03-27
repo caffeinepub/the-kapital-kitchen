@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    /* Dark restaurant theme - near-black bg */
+    --background: 0.095 0.003 260;
+    --foreground: 0.95 0.01 85;
+    --card: 0.135 0.005 260;
+    --card-foreground: 0.95 0.01 85;
+    --popover: 0.135 0.005 260;
+    --popover-foreground: 0.95 0.01 85;
+    /* Amber/orange accent as primary */
+    --primary: 0.72 0.165 55;
+    --primary-foreground: 0.095 0.003 260;
+    --secondary: 0.18 0.006 260;
+    --secondary-foreground: 0.95 0.01 85;
+    --muted: 0.18 0.006 260;
+    --muted-foreground: 0.6 0.02 240;
+    --accent: 0.72 0.165 55;
+    --accent-foreground: 0.095 0.003 260;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.22 0.008 260;
+    --input: 0.22 0.008 260;
+    --ring: 0.72 0.165 55;
+    --chart-1: 0.72 0.165 55;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+    --sidebar: 0.095 0.003 260;
+    --sidebar-foreground: 0.95 0.01 85;
+    --sidebar-primary: 0.72 0.165 55;
+    --sidebar-primary-foreground: 0.095 0.003 260;
+    --sidebar-accent: 0.18 0.006 260;
+    --sidebar-accent-foreground: 0.95 0.01 85;
+    --sidebar-border: 0.22 0.008 260;
+    --sidebar-ring: 0.72 0.165 55;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: "Inter", sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(var(--primary));
+  }
+}
+
+@layer utilities {
+  .font-cinzel {
+    font-family: "Cinzel", serif;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 {
+    transition-delay: 0.1s;
+  }
+  .reveal-delay-2 {
+    transition-delay: 0.2s;
+  }
+  .reveal-delay-3 {
+    transition-delay: 0.3s;
+  }
+  .reveal-delay-4 {
+    transition-delay: 0.4s;
+  }
+
+  /* WhatsApp pulse */
+  @keyframes wa-pulse {
+    0% {
+      box-shadow: 0 0 0 0 oklch(0.72 0.165 55 / 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 14px oklch(0.72 0.165 55 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 oklch(0.72 0.165 55 / 0);
+    }
+  }
+
+  .wa-pulse {
+    animation: wa-pulse 2s infinite;
+  }
+
+  /* Card hover glow */
+  .dish-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px oklch(0.72 0.165 55 / 0.2);
+  }
+
+  .dish-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Amber gradient text */
+  .text-amber-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.78 0.17 60),
+      oklch(0.65 0.18 45)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .dish-card:hover {
+      transform: none;
+    }
+    .wa-pulse {
+      animation: none;
+    }
+  }
+}
